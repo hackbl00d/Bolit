@@ -1,0 +1,143 @@
+.report {
+  padding: var(--sp-2xl) 0 var(--sp-3xl);
+}
+
+.report-hero {
+  text-align: center;
+  margin-bottom: var(--sp-2xl);
+}
+
+.report-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin-bottom: var(--sp-sm);
+}
+
+.report-subtitle {
+  color: var(--clr-text-secondary);
+  font-size: 1.0625rem;
+}
+
+.report-content {
+  max-width: 40rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+}
+
+// ─── Cards ─────────────────────────────────────────────────────
+.action-card,
+.guide-card,
+.alt-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-xl);
+}
+
+.action-card {
+  text-align: center;
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin-bottom: var(--sp-sm);
+  }
+
+  p {
+    color: var(--clr-text-secondary);
+    font-size: 0.9375rem;
+    margin-bottom: var(--sp-lg);
+    line-height: 1.6;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--clr-accent);
+  color: white;
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background: var(--clr-accent-hover);
+    box-shadow: var(--shadow-md);
+    color: white;
+    transform: translateY(-1px);
+  }
+}
+
+// ─── Guide ─────────────────────────────────────────────────────
+.guide-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: var(--sp-lg);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+}
+
+.step {
+  display: flex;
+  gap: var(--sp-md);
+  align-items: flex-start;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-accent);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.step-content {
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--sp-xs);
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: var(--clr-text-secondary);
+    line-height: 1.6;
+  }
+}
+
+// ─── Alt card ──────────────────────────────────────────────────
+.alt-card {
+  background: var(--clr-warn-light);
+  border-color: var(--clr-warn);
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--sp-sm);
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: var(--clr-text-secondary);
+    line-height: 1.6;
+  }
+}

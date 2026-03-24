@@ -1,0 +1,66 @@
+<div class="report container">
+  <div class="report-hero">
+    <h1 class="report-title">Докладване на неточности</h1>
+    <p class="report-subtitle">Помогнете ни да подобрим речника, като докладвате грешки в преводите.</p>
+  </div>
+
+  <div class="report-content">
+    <!-- Quick action -->
+    <div class="action-card">
+      <h2>Докладвай грешка</h2>
+      <p>Натиснете бутона по-долу, за да отворите нов доклад в GitHub. Ще се попълни шаблон автоматично.</p>
+      <a [href]="buildIssueUrl()" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        Отвори нов доклад в GitHub
+      </a>
+    </div>
+
+    <!-- How-to guide -->
+    <div class="guide-card">
+      <h2>Как да докладвам?</h2>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <div class="step-content">
+            <h3>Намерете думата</h3>
+            <p>Отворете <a href="/dictionary">Речника</a> и намерете думата с грешен или непълен превод.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <div class="step-content">
+            <h3>Натиснете иконата за докладване</h3>
+            <p>До всяка дума в речника има икона &#9872;. Натиснете я, за да отворите доклад с предварително попълнена информация.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <div class="step-content">
+            <h3>Опишете проблема</h3>
+            <p>Попълнете предложената корекция и допълнителна информация. Колкото повече детайли, толкова по-бързо ще поправим грешката.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span class="step-number">4</span>
+          <div class="step-content">
+            <h3>Изпратете доклада</h3>
+            <p>Натиснете "Submit new issue" в GitHub. Ще получите известие, когато грешката бъде поправена.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alternative -->
+    <div class="alt-card">
+      <h3>Алтернативен начин</h3>
+      <p>
+        Ако нямате GitHub акаунт, можете да изпратите имейл на
+        <a href="mailto:ghostdog0473&#64;gmail.com">ghostdog0473&#64;gmail.com</a>
+        с описание на грешката.
+      </p>
+    </div>
+  </div>
+</div>

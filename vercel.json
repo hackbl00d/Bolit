@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npx ng build",
+  "outputDirectory": "dist/polyglot/browser",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

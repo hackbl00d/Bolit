@@ -1,0 +1,112 @@
+<div class="dictionary container">
+  <!-- Header -->
+  <div class="dict-header">
+    <h1 class="dict-title">Речник</h1>
+    <button class="direction-toggle" (click)="switchDirection()" [attr.aria-label]="'Превключи към ' + directionLabel">
+      <span class="dir-label">{{ directionLabelShort }}</span>
+      <span class="dir-swap" aria-hidden="true">&#8644;</span>
+    </button>
+  </div>
+
+  <!-- Search bar -->
+  <div class="search-wrapper">
+    <label for="search-input" class="sr-only">Търсене на дума</label>
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">&#128269;</span>
+      <input
+        id="search-input"
+        type="search"
+        [placeholder]="direction === 'ita-bul' ? 'Търсете италианска дума...' : 'Търсете българска дума...'"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch($event)"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      @if (searchQuery) {
+        <button class="search-clear" (click)="searchQuery = ''; onSearch('')" aria-label="Изчисти търсенето">
+          &times;
+        </button>
+      }
+    </div>
+    @if (searchMode) {
+      <p class="search-info">Намерени: <strong>{{ entries.length }}</strong> резултата</p>
+    }
+  </div>
+
+  <!-- Alphabet navigation -->
+  @if (!searchMode) {
+    <nav class="alphabet" aria-label="Навигация по букви">
+      @for (l of letters; track l.letter) {
+        <button
+          class="letter-btn"
+          [class.active]="activeLetter === l.letter"
+          (click)="selectLetter(l.letter)"
+          [attr.aria-label]="l.letter + ' (' + l.count + ' думи)'"
+          [attr.title]="l.count + ' думи'"
+        >
+          {{ l.letter }}
+        </button>
+      }
+    </nav>
+  }
+
+  <!-- Loading indicator -->
+  @if (loading) {
+    <div class="loading" role="status">
+      <div class="spinner"></div>
+      <span>Зареждане...</span>
+    </div>
+  }
+
+  <!-- Entry list with virtual scroll -->
+  @if (!loading && entries.length > 0) {
+    <cdk-virtual-scroll-viewport
+      itemSize="88"
+      class="entry-viewport"
+      role="list"
+      aria-label="Списък с думи"
+    >
+      <div
+        *cdkVirtualFor="let entry of entries; trackBy: trackByWord"
+        class="entry-card"
+        role="listitem"
+      >
+        <div class="entry-header">
+          <h3 class="entry-word">{{ entry.word }}</h3>
+          <a
+            class="report-btn"
+            [href]="buildReportUrl(entry)"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Докладвай неточност"
+            aria-label="Докладвай неточност за {{ entry.word }}"
+          >
+            &#9872;
+          </a>
+        </div>
+        <ul class="entry-senses">
+          @for (sense of entry.senses; track sense) {
+            <li>{{ sense }}</li>
+          }
+        </ul>
+        @if (entry.examples.length > 0) {
+          <div class="entry-examples">
+            @for (ex of entry.examples; track ex) {
+              <p class="example">{{ ex }}</p>
+            }
+          </div>
+        }
+      </div>
+    </cdk-virtual-scroll-viewport>
+  }
+
+  <!-- Empty state -->
+  @if (!loading && entries.length === 0 && (searchMode || activeLetter)) {
+    <div class="empty-state">
+      <p>Няма намерени резултати.</p>
+      @if (searchMode) {
+        <p class="empty-hint">Опитайте с различна дума или превключете посоката на превод.</p>
+      }
+    </div>
+  }
+</div>
