@@ -1,5 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .dictionary {
-  padding: var(--sp-xl) 0 var(--sp-2xl);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: var(--sp-md) 0 0;
 }
 
 // ─── Header ────────────────────────────────────────────────────
@@ -166,9 +176,10 @@ input[type='search'] {
 
 // ─── Virtual scroll viewport ───────────────────────────────────
 .entry-viewport {
-  height: 65vh;
+  flex: 1;
+  min-height: 0;
   border: 1px solid var(--clr-border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   background: var(--clr-surface);
 }
 
@@ -272,7 +283,7 @@ input[type='search'] {
 @media (max-width: 48rem) {
   .dict-title { font-size: 1.5rem; }
 
-  .entry-viewport { height: 55vh; }
+  .entry-viewport { min-height: 12rem; }
 
   .report-btn { opacity: 1; }
 
