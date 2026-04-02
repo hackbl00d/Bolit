@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Subject, forkJoin, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, takeUntil, catchError } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil, catchError, map } from 'rxjs/operators';
 import { DictionaryService } from '../../services/dictionary.service';
 import { DictionaryEntry, DictionaryDirection, LetterInfo } from '../../models/dictionary.model';
 
@@ -54,22 +54,23 @@ export class DictionaryComponent implements OnInit, OnDestroy {
           }
           this.searchMode = true;
           this.loading = true;
-          // Load all letters and search across them
-          const letterKeys = this.letters.map(l => l.letter);
-          const requests = letterKeys.map(letter =>
-            this.dictService.getLetterEntries(this.direction, letter).pipe(catchError(() => of([])))
-          );
-          return forkJoin(requests).pipe(
-            switchMap(results => {
-              const all = results.flat();
-              const q = query.toLowerCase();
-              const filtered = all.filter(
-                e =>
-                  e.word.toLowerCase().includes(q) ||
-                  e.senses.some(s => s.toLowerCase().includes(q))
-              );
-              return of(filtered);
-            })
+
+          const q = query.trim().toLowerCase();
+          const firstChar = q.charAt(0).toUpperCase();
+
+          // Optimization: Only load the letter file that matches the first char.
+          // Non-letter characters are grouped under '#' in the split script.
+          const isLetter = /\p{L}/u.test(firstChar);
+          const targetKey = isLetter ? firstChar : '#';
+          const target = this.letters.find(l => l.letter === targetKey);
+
+          if (!target) {
+            return of([]);
+          }
+
+          return this.dictService.getLetterEntries(this.direction, target.letter).pipe(
+            map(entries => entries.filter(e => e.word.toLowerCase().startsWith(q))),
+            catchError(() => of([]))
           );
         }),
         takeUntil(this.destroy$)
