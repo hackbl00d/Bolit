@@ -28,7 +28,14 @@ function splitDictionary(filename, outSubdir) {
   for (const entry of entries) {
     const word = entry.word.trim();
     if (!word) continue;
-    const firstChar = word[0].toUpperCase();
+    let firstChar;
+    if (outSubdir === 'ita-bul') {
+      firstChar = word[0].toLocaleUpperCase('it-IT');
+    } else if (outSubdir === 'bul-ita') {
+      firstChar = word[0].toLocaleUpperCase('bg-BG');
+    } else {
+      firstChar = word[0].toUpperCase();
+    }
     // Group non-letter chars under '#'
     const key = /\p{L}/u.test(firstChar) ? firstChar : '#';
     if (!groups[key]) groups[key] = [];
