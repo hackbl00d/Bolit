@@ -1,42 +1,21 @@
-<nav class="navbar" role="navigation" aria-label="Основна навигация">
-  <div class="nav-inner container">
-    <a routerLink="/" class="nav-brand">
-      <span class="brand-icon">B</span>
-      <span class="brand-text">Bolit</span>
-    </a>
-    <button
-      class="nav-toggle"
-      (click)="menuOpen = !menuOpen"
-      [attr.aria-expanded]="menuOpen"
-      aria-controls="nav-menu"
-      aria-label="Отвори менюто"
-    >
-      <span class="hamburger" [class.open]="menuOpen"></span>
-    </button>
-    <ul id="nav-menu" class="nav-links" [class.open]="menuOpen" role="menubar">
-      <li role="none">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="menuitem" (click)="menuOpen = false">Начало</a>
-      </li>
-      <li role="none">
-        <a routerLink="/dictionary" routerLinkActive="active" role="menuitem" (click)="menuOpen = false">Речник</a>
-      </li>
-      <li role="none">
-        <a routerLink="/report" routerLinkActive="active" role="menuitem" (click)="menuOpen = false">Докладвай</a>
-      </li>
-      <li role="none">
-        <a routerLink="/contacts" routerLinkActive="active" role="menuitem" (click)="menuOpen = false">Контакти</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<section class="page">
+  <nav class="navbar" role="navigation" aria-label="Основна навигация">
+    <div class="nav-right">
+      Bolit
+    </div>
+    <div class="nav-right">
+      <ul>
+        <li>
+          Dictionary
+        </li>
+        <li>
+          Grammar
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<main>
-  <router-outlet />
-</main>
-
-<footer class="footer">
-  <div class="container footer-inner">
-    <span>&copy; {{ currentYear }} Bolit</span>
-    <a href="https://github.com/hackbl00d/Bolit" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </div>
-</footer>
+  <main>
+    <router-outlet />
+  </main>
+</section>
