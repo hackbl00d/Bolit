@@ -104,6 +104,8 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
 
         modelBuilder.Entity<WordRef>(entity =>
         {
+            entity.HasNoKey();
+            
             entity.Property(wr => wr.Word).IsRequired().HasMaxLength(50);
             entity.Property(wr => wr.Tags).HasMaxLength(100);
         });

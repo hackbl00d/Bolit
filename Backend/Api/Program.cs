@@ -1,11 +1,39 @@
 using Backend.Api.Mappers;
-using Backend.Api;  
+using Backend.Api.Extensions;
+using Backend.Api;
+using Backend.Database;
+using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+
+var secretPath = "/run/secrets/backend_env";
+if (File.Exists(secretPath))
+{
+    Env.Load(secretPath);
+}
+
+else
+{
+    Env.Load("../../.env");
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<DictionaryEntryMapper>();
+builder.Services.AddDbContext<BackendDbContext>(options =>
+{
+    string host =  Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+    string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+    string  database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "my_db";
+    string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
+    string  password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "normal_password";
+    
+    options.UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}");
+
+});
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHealthChecks("/health");
 
 var summaries = new[]
 {
@@ -34,6 +64,8 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.Services.SeedDictionaryEntries();
 
 app.Run();
 

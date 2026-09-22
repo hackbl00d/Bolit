@@ -1,8 +1,0 @@
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.csproj.AssemblyReference.cache
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/rpswa.dswa.cache.json
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.GeneratedMSBuildEditorConfig.editorconfig
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.AssemblyInfoInputs.cache
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.AssemblyInfo.cs
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.csproj.CoreCompileInputs.cache
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.MvcApplicationPartsAssemblyInfo.cs
-/mount/Projects/Bolit/Backend/Api/obj/Debug/net10.0/Backend.Api.MvcApplicationPartsAssemblyInfo.cache

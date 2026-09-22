@@ -6,13 +6,14 @@ using Backend.Database;
 
 namespace Backend.Api.Extensions;
 
-public class Extensions
+public static class Extensions
 {
-    public void SeedDictionaryEntries(IServiceProvider serviceProvider, 
-        DictionaryEntryMapper  mapper)
+    public static void SeedDictionaryEntries(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateAsyncScope();
         using var context = scope.ServiceProvider.GetRequiredService<BackendDbContext>();
+        var mapper = scope.ServiceProvider.GetRequiredService<DictionaryEntryMapper>();
+        
         string sourceFile = "it-extract.jsonl.gz";
         string destinationFile = "it-extract.jsonl";
 

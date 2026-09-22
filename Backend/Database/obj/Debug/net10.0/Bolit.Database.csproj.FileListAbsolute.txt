@@ -1,4 +1,0 @@
-/mount/Projects/Bolit/Bolit.Database/obj/Debug/net10.0/Bolit.Database.GeneratedMSBuildEditorConfig.editorconfig
-/mount/Projects/Bolit/Bolit.Database/obj/Debug/net10.0/Bolit.Database.AssemblyInfoInputs.cache
-/mount/Projects/Bolit/Bolit.Database/obj/Debug/net10.0/Bolit.Database.AssemblyInfo.cs
-/mount/Projects/Bolit/Bolit.Database/obj/Debug/net10.0/Bolit.Database.csproj.CoreCompileInputs.cache
