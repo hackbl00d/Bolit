@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Database;
 
-public class BackendDbContext : DbContext
+public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbContext(options)
 {
     public DbSet<Entry> Entries { get; set; }
     
@@ -92,10 +92,18 @@ public class BackendDbContext : DbContext
             entity.Property(s => s.RawTags).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<WordRef>(entity =>
+        modelBuilder.Entity<RelatedWord>(entity =>
         {
             entity.HasKey(wr => wr.EntryId);
-            
+        });
+        
+        modelBuilder.Entity<DerivedWord>(entity =>
+        {
+            entity.HasKey(wr => wr.EntryId);
+        });
+
+        modelBuilder.Entity<WordRef>(entity =>
+        {
             entity.Property(wr => wr.Word).IsRequired().HasMaxLength(50);
             entity.Property(wr => wr.Tags).HasMaxLength(100);
         });

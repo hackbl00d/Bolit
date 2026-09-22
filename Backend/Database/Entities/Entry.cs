@@ -22,9 +22,9 @@ public class Entry
     
     public List<Synonym> Synonyms { get; set; } = new();
     
-    public List<WordRef> DerivedWords { get; set; } = new();
+    public List<DerivedWord> DerivedWords { get; set; } = new();
     
-    public List<WordRef> RelatedWords { get; set; } = new();
+    public List<RelatedWord> RelatedWords { get; set; } = new();
     
     public List<Proverb> Proverbs { get; set; } = new();
 }

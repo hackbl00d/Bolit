@@ -10,9 +10,6 @@ public class BackendDbContextFactory : IDesignTimeDbContextFactory<BackendDbCont
         var options = new DbContextOptionsBuilder<BackendDbContext>().UseNpgsql("Host=localhost;Port=5432;Database=mydb;Username=postgres;Password=postgres")
             .Options;
 
-        var optionsBuilder = new DbContextOptionsBuilder<BackendDbContext>();
-        optionsBuilder.UseSqlite("Data Source=blog.db");
-
-        return new BackendDbContext();
+        return new BackendDbContext(options);
     }
 }
