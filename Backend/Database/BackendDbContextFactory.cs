@@ -8,13 +8,22 @@ public class BackendDbContextFactory : IDesignTimeDbContextFactory<BackendDbCont
 {
     public BackendDbContext CreateDbContext(string[] args)
     {
-        Env.Load("../../");
+        var secretPath = "/run/secrets/backend_env";
+        if (File.Exists(secretPath))
+        {
+            Env.Load(secretPath);
+        }
 
-        string host =  Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
-        string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+        else
+        {
+            Env.Load("../../.env");
+        }
+
+        string host =  Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "localhost";
+        string port = Environment.GetEnvironmentVariable("POSTGRES_PORT") ?? "5432";
         string  database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "my_db";
         string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
-        string  password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "normal_password";
+        string  password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "normal_password";
 
         var options = new DbContextOptionsBuilder<BackendDbContext>()
             .UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}")
