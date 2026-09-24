@@ -2,13 +2,15 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS publish
 WORKDIR /src
 
 COPY *.sln ./
-COPY Api/Backend.Api.csproj ./
+COPY Api/Backend.Api.csproj ./Api/
 COPY Database/Backend.Database.csproj ./Database/
 
-RUN dotnet restore ./Backend.Api.csproj
+RUN dotnet restore Api/Backend.Api.csproj
 
 COPY . .
-RUN dotnet publish "Backend.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false /p:EnableSourceLink=false
+
+WORKDIR /src/Api
+RUN dotnet publish "Backend.Api.csproj" -c Release -o /app/publish /p:EnableSourceLink=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS final
 WORKDIR /app
