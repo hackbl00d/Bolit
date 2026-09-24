@@ -13,20 +13,20 @@ public static class Extensions
         using var scope = serviceProvider.CreateAsyncScope();
         using var context = scope.ServiceProvider.GetRequiredService<BackendDbContext>();
         var mapper = scope.ServiceProvider.GetRequiredService<DictionaryEntryMapper>();
-        
-        string sourceFile = "it-extract.jsonl.gz";
-        string destinationFile = "it-extract.jsonl";
 
-        using (FileStream compressedFileStream = new FileStream(sourceFile, FileMode.Open, FileAccess.Read))
-        using (FileStream outputFileStream = new FileStream(destinationFile, FileMode.Create, FileAccess.Write))
-        using (GZipStream decompressionStream = new GZipStream(compressedFileStream, CompressionMode.Decompress))
+        var dataFile = "./it-extract.jsonl";
+        
+        if (!File.Exists(dataFile))
         {
+            string sourceFile = "./it-extract.jsonl.gz";
+
+            using FileStream compressedFileStream = new FileStream(sourceFile, FileMode.Open, FileAccess.Read);
+            using FileStream outputFileStream = new FileStream(dataFile, FileMode.Create, FileAccess.Write);
+            using GZipStream decompressionStream = new GZipStream(compressedFileStream, CompressionMode.Decompress);
             decompressionStream.CopyTo(outputFileStream);
         }
-        
-        string path = @"../it-extract.jsonl";
            
-        StreamReader reader = new StreamReader(path);
+        StreamReader reader = new StreamReader(dataFile);
         string? line;
 
         int counter = 0;
