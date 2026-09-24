@@ -23,11 +23,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton<DictionaryEntryMapper>();
 builder.Services.AddDbContext<BackendDbContext>(options =>
 {
-    string host =  Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
-    string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+    string host =  Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "postgres";
+    string port = Environment.GetEnvironmentVariable("POSTGRES_PORT") ?? "5432";
     string  database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "my_db";
     string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
-    string  password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "normal_password";
+    string  password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "normal_password";
     
     options.UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}");
 
