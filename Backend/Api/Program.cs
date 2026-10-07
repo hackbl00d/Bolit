@@ -28,13 +28,26 @@ builder.Services.AddDbContext<BackendDbContext>(options =>
     string  database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "my_db";
     string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
     string  password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "normal_password";
-    
-    options.UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}");
 
+    options
+        .UseNpgsql(
+            $"Host={host};Port={port};Database={database};Username={username};Password={password}",
+            npgBuilder => npgBuilder.MigrationsAssembly(typeof(BackendDbContext).Assembly.GetName().Name)
+        );
 });
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<BackendDbContext>();
+    Console.WriteLine(dbContext.Database.GetPendingMigrations().Any());
+    if (dbContext.Database.GetPendingMigrations().Any())
+    {
+        await dbContext.Database.MigrateAsync();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
