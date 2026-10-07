@@ -8,18 +8,9 @@ public class BackendDbContextFactory : IDesignTimeDbContextFactory<BackendDbCont
 {
     public BackendDbContext CreateDbContext(string[] args)
     {
-        var secretPath = "/run/secrets/backend_env";
-        if (File.Exists(secretPath))
-        {
-            Env.Load(secretPath);
-        }
+        Env.Load("../../secrets/.env");
 
-        else
-        {
-            Env.Load("../../.env");
-        }
-
-        string host =  Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "localhost";
+        string host =  Environment.GetEnvironmentVariable("localhost") ?? "localhost";
         string port = Environment.GetEnvironmentVariable("POSTGRES_PORT") ?? "5432";
         string  database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "my_db";
         string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
@@ -29,6 +20,6 @@ public class BackendDbContextFactory : IDesignTimeDbContextFactory<BackendDbCont
             .UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}")
             .Options;
 
-        return new BackendDbContext(options);
+            return new BackendDbContext(options);
     }
 }
