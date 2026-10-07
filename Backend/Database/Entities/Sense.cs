@@ -7,8 +7,11 @@ public class Sense
     public List<string> Glosses { get; set; } = new();
     
     public List<string> RawTags { get; set; } = new();
+
+    public List<Example> Examples { get; set; } = new();
     
     public int DictionaryEntryId { get; set; }
     
     public Entry Entry { get; set; } = null!;
 }
+
