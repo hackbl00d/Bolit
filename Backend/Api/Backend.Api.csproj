@@ -13,13 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Database\Backend.Database.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Database\Backend.Database.csproj" />
   </ItemGroup>
-  <ItemGroup>
+
+ <ItemGroup>
     <None Include="it-extract.jsonl.gz" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
