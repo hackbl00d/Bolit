@@ -26,7 +26,7 @@ public class Entry
     
     public List<Translation> Translations { get; set; } = new();
     
-    public List<Synonym> Synonyms { get; set; } = new();
+    public List<Synonym>? Synonyms { get; set; } = new();
     
     public List<DerivedWord>? DerivedWords { get; set; } = new();
     

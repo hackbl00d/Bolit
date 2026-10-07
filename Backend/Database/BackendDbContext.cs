@@ -193,7 +193,7 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
             entity.HasKey(s => s.SoundId);
 
             entity
-                .Property(s => s.IPA)
+                .Property(s => s.Ipa)
                 .IsRequired()
                 .HasMaxLength(200);
         });

@@ -4,8 +4,6 @@ namespace Backend.Api.Dtos;
 
 public class TranslationDto
 {
-    public Guid TranslationId { get; set; } = Guid.CreateVersion7();
-    
     [JsonPropertyName("lang_code")] 
     public string LangCode { get; set; }
     

@@ -4,8 +4,6 @@ namespace Backend.Api.Dtos;
 
 public class DictionaryEntryDto
 {
-    public Guid DictEntryId { get; set; } = Guid.CreateVersion7();
-    
     [JsonPropertyName("word")] 
     public string Word { get; set; }
     
@@ -41,4 +39,19 @@ public class DictionaryEntryDto
     
     [JsonPropertyName("proverbs")] 
     public List<ProverbDto>? Proverbs  { get; set; }
+    
+    [JsonPropertyName("tags")]
+    public List<string>? Tags { get; set; }
+    
+    [JsonPropertyName("forms")] 
+    public List<FormDto> Forms { get; set; }
+    
+    [JsonPropertyName("etymology_texts")]
+    public List<string> EtymologyTexts { get; set; }
+    
+    [JsonPropertyName("Hyphenations")]
+    public List<HyphenationDto> Hyphenations { get; set; }
+    
+    [JsonPropertyName("sounds")] 
+    public List<SoundDto> Sounds { get; set; }
 }

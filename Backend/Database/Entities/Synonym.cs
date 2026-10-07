@@ -6,7 +6,7 @@ public class Synonym
     
     public string Word { get; set; } = string.Empty;
     
-    public List<string> RawTags { get; set; } = new();
+    public List<string>? RawTags { get; set; } = new();
 
     public int DictionaryEntryId { get; set; }
     

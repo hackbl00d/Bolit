@@ -12,7 +12,7 @@ public class Translation
     
     public string? Sense { get; set; }
     
-    public List<string> Tags { get; set; } = new();
+    public List<string>? Tags { get; set; } = new();
 
     public int DictionaryEntryId { get; set; }
     

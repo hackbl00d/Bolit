@@ -4,10 +4,8 @@ namespace Backend.Api.Dtos;
 
 public class ProverbDto
 {
-    public Guid ProverbId { get; set; } = Guid.CreateVersion7();
-    
     [JsonPropertyName("word")] 
-    public string Word { get; set; }
+    public string Phrase { get; set; }
     
     [JsonPropertyName("sense")]
     public string? Sense  { get; set; }
