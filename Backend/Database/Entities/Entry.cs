@@ -16,15 +16,25 @@ public class Entry
 
     public List<string> Categories { get; set; } = new();
 
-    public List<Sense> Senses { get; set; } = new();
+    public List<Sense>? Senses { get; set; } = new();
+
+    public required List<string> Tags { get; set; }
+
+    public required List<Form> Forms { get; set; }
+
+    public required List<string> EtymologyTexts { get; set; }
     
     public List<Translation> Translations { get; set; } = new();
     
     public List<Synonym> Synonyms { get; set; } = new();
     
-    public List<DerivedWord> DerivedWords { get; set; } = new();
+    public List<DerivedWord>? DerivedWords { get; set; } = new();
     
-    public List<RelatedWord> RelatedWords { get; set; } = new();
+    public List<RelatedWord>? RelatedWords { get; set; } = new();
     
     public List<Proverb> Proverbs { get; set; } = new();
+
+    public required List<Hyphenation> Hyphenations { get; set; }
+
+    public required List<Sound> Sounds { get; set; }
 }
