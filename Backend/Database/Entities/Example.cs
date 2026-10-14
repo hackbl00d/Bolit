@@ -12,7 +12,7 @@ public class Example
 
     public required string Reference { get; set; }
     
-    public int SenseId { get; set; }
+    public Guid SenseId { get; set; }
     
     public Sense Sense { get; set; } = null!;
 }

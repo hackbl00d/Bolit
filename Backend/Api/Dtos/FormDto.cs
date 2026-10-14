@@ -11,7 +11,7 @@ public class FormDto
     public List<string> Tags { get; set; }
     
     [JsonPropertyName("raw_tags")]
-    public List<string> RawTags { get; set; }
+    public List<string>? RawTags { get; set; }
     
     [JsonPropertyName("source")]
     public string Source { get; set; }

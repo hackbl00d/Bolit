@@ -6,7 +6,7 @@ public class Hyphenation
 
     public required List<string> Parts { get; set; }
     
-    public int DictionaryEntryId { get; set; }
+    public Guid EntryId { get; set; }
     
     public Entry Entry { get; set; } = null!;
 }

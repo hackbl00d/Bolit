@@ -8,7 +8,7 @@ public class Proverb
     
     public string? Sense { get; set; }
 
-    public int DictionaryEntryId { get; set; }
+    public Guid EntryId { get; set; }
     
     public Entry Entry { get; set; } = null!;
 }

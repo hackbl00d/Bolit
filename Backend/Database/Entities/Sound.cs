@@ -6,7 +6,7 @@ public class Sound
 
     public required string Ipa { get; set; }
     
-    public int DictionaryEntryId { get; set; }
+    public Guid EntryId { get; set; }
     
     public Entry Entry { get; set; } = null!;
 }

@@ -14,11 +14,11 @@ public class Entry
     
     public string PosTitle { get; set; } = string.Empty;
 
-    public List<string> Categories { get; set; } = new();
+    public List<string>? Categories { get; set; } = new();
 
     public List<Sense>? Senses { get; set; } = new();
 
-    public required List<string> Tags { get; set; }
+    public List<string>? Tags { get; set; }
 
     public required List<Form> Forms { get; set; }
 
@@ -32,7 +32,7 @@ public class Entry
     
     public List<RelatedWord>? RelatedWords { get; set; } = new();
     
-    public List<Proverb> Proverbs { get; set; } = new();
+    public List<Proverb>? Proverbs { get; set; } = new();
 
     public required List<Hyphenation> Hyphenations { get; set; }
 
