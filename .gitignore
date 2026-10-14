@@ -55,3 +55,6 @@ obj/
 
 # Input files
 extract.jsonl
+
+# Resharper based files
+*.sln.DotSettings.user
