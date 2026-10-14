@@ -10,17 +10,17 @@ public partial class DictionaryEntryMapper
     [MapperIgnoreTarget(nameof(Entry.EntryId))]
     public partial Entry ToEntity(DictionaryEntryDto dto);
 
-    [MapperIgnoreTarget(nameof(Synonym.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Synonym.EntryId))]
     [MapperIgnoreTarget(nameof(Synonym.Entry))]
     [MapperIgnoreTarget(nameof(Synonym.SynonymId))]
     public partial Synonym ToSynonymEntity(SynonymDto dto);
 
-    [MapperIgnoreTarget(nameof(Form.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Form.EntryId))]
     [MapperIgnoreTarget(nameof(Form.Entry))]
     [MapperIgnoreTarget(nameof(Form.FormId))]
     public partial Form ToFormEntity(FormDto dto);
     
-    [MapperIgnoreTarget(nameof(Hyphenation.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Hyphenation.EntryId))]
     [MapperIgnoreTarget(nameof(Hyphenation.Entry))]
     [MapperIgnoreTarget(nameof(Hyphenation.HyphenationId))]
     public partial Hyphenation ToHyphenationEntity(HyphenationDto dto);
@@ -30,7 +30,7 @@ public partial class DictionaryEntryMapper
     [MapperIgnoreTarget(nameof(Example.Sense))]
     public partial Example ToExampleEntity(ExampleDto dto);
     
-    [MapperIgnoreTarget(nameof(Proverb.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Proverb.EntryId))]
     [MapperIgnoreTarget(nameof(Proverb.Entry))]
     [MapperIgnoreTarget(nameof(Proverb.ProverbId))]
     public partial Proverb ToProverbEntity(ProverbDto dto);
@@ -45,17 +45,17 @@ public partial class DictionaryEntryMapper
     [MapperIgnoreTarget(nameof(DerivedWord.DerivedWordId))]
     public partial DerivedWord ToDerivedWordEntity(DerivedWordDto dto);
     
-    [MapperIgnoreTarget(nameof(Translation.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Translation.EntryId))]
     [MapperIgnoreTarget(nameof(Translation.Entry))]
     [MapperIgnoreTarget(nameof(Translation.TranslationId))]
     public partial Translation ToDerivedWordEntity(TranslationDto dto);
     
-    [MapperIgnoreTarget(nameof(Sound.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Sound.EntryId))]
     [MapperIgnoreTarget(nameof(Sound.SoundId))]
     [MapperIgnoreTarget(nameof(Sound.Entry))]
     public partial Sound ToDerivedWordEntity(SoundDto dto);
     
-    [MapperIgnoreTarget(nameof(Sense.DictionaryEntryId))]
+    [MapperIgnoreTarget(nameof(Sense.EntryId))]
     [MapperIgnoreTarget(nameof(Sense.Entry))]
     [MapperIgnoreTarget(nameof(Sense.SenseId))]
     public partial Sense ToDerivedWordEntity(SenseDto dto);
