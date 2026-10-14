@@ -29,11 +29,22 @@ builder.Services.AddDbContext<BackendDbContext>(options =>
     string username = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "normal_user";
     string  password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "normal_password";
 
+    var isDev = Environment.GetEnvironmentVariable("ENVIRONMENT") == "Development";
+    string connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password}";
+    
+    if (isDev)
+        connectionString += ";Include Error Detail=true";
+    
     options
-        .UseNpgsql(
-            $"Host={host};Port={port};Database={database};Username={username};Password={password}",
+        .UseNpgsql(connectionString,
             npgBuilder => npgBuilder.MigrationsAssembly(typeof(BackendDbContext).Assembly.GetName().Name)
         );
+    
+    if (isDev)
+    {
+        options.EnableSensitiveDataLogging();
+        options.EnableDetailedErrors();
+    }
 });
 builder.Services.AddHealthChecks();
 
