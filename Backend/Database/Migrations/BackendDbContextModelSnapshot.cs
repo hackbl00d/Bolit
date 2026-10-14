@@ -25,10 +25,11 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Database.Entities.DerivedWord", b =>
                 {
-                    b.Property<Guid>("EntryId")
+                    b.Property<Guid>("DerivedWordId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DerivedWordId")
+                    b.Property<Guid>("EntryId")
                         .HasColumnType("uuid");
 
                     b.PrimitiveCollection<List<string>>("Tags")
@@ -37,7 +38,9 @@ namespace Backend.Database.Migrations
                     b.Property<string>("Word")
                         .HasColumnType("text");
 
-                    b.HasKey("EntryId");
+                    b.HasKey("DerivedWordId");
+
+                    b.HasIndex("EntryId");
 
                     b.ToTable("DerivedWord");
                 });
@@ -103,7 +106,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("text[]");
 
                     b.Property<string>("Source")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
@@ -160,7 +162,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("character varying(200)");
 
                     b.Property<string>("Sense")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
@@ -173,10 +174,11 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Database.Entities.RelatedWord", b =>
                 {
-                    b.Property<Guid>("EntryId")
+                    b.Property<Guid>("RelatedWordId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RelatedWordId")
+                    b.Property<Guid>("EntryId")
                         .HasColumnType("uuid");
 
                     b.PrimitiveCollection<List<string>>("Tags")
@@ -185,7 +187,9 @@ namespace Backend.Database.Migrations
                     b.Property<string>("Word")
                         .HasColumnType("text");
 
-                    b.HasKey("EntryId");
+                    b.HasKey("RelatedWordId");
+
+                    b.HasIndex("EntryId");
 
                     b.ToTable("RelatedWord");
                 });
@@ -200,7 +204,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("uuid");
 
                     b.PrimitiveCollection<List<string>>("Glosses")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("text[]");
 
@@ -281,7 +284,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("character varying(20)");
 
                     b.Property<string>("Sense")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
@@ -304,12 +306,10 @@ namespace Backend.Database.Migrations
             modelBuilder.Entity("Backend.Database.Entities.WordRef", b =>
                 {
                     b.PrimitiveCollection<List<string>>("Tags")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("text[]");
 
                     b.Property<string>("Word")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
