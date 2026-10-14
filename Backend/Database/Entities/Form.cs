@@ -4,13 +4,13 @@ public class Form
 {
     public Guid FormId { get; set; } = Guid.CreateVersion7();
 
-    public required string Text { get; set; }
+    public string Text { get; set; }
 
-    public required List<string> Tags { get; set; }
+    public List<string> Tags { get; set; }
 
     public List<string>? RawTags { get; set; }
 
-    public required string Source { get; set; }
+    public string? Source { get; set; }
     
     public Guid EntryId { get; set; }
     

@@ -20,7 +20,7 @@ public class Entry
 
     public List<string>? Tags { get; set; }
 
-    public required List<Form> Forms { get; set; }
+    public required List<Form>? Forms { get; set; }
 
     public required List<string> EtymologyTexts { get; set; }
     
