@@ -17,9 +17,15 @@ public class BackendDbContextFactory : IDesignTimeDbContextFactory<BackendDbCont
         string  password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "normal_password";
 
         var options = new DbContextOptionsBuilder<BackendDbContext>()
-            .UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password}")
-            .Options;
+            .UseNpgsql($"Host={host};Port={port};Database={database};Username={username};Password={password};Include Error Detail=true");
+        
+        if (Environment.GetEnvironmentVariable("Environment") == "Development")
+        {
+            options.EnableSensitiveDataLogging();
+            options.EnableDetailedErrors();
+            options.EnableDetailedErrors();
+        }
 
-            return new BackendDbContext(options);
+        return new BackendDbContext(options.Options);
     }
 }
