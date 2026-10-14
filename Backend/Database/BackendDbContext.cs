@@ -51,53 +51,62 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
             entity
                 .HasMany(e => e.Synonyms)
                 .WithOne(s => s.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Senses)
                 .WithOne(s => s.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Translations)
                 .WithOne(t => t.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.DerivedWords)
                 .WithOne(d => d.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.RelatedWords)
                 .WithOne(r => r.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Proverbs)
                 .WithOne(p => p.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Hyphenations)
                 .WithOne(h => h.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Sounds)
                 .WithOne(s => s.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity
                 .HasMany(e => e.Forms)
                 .WithOne(f => f.Entry)
+                .HasForeignKey(s => s.EntryId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Sense>(entity =>
         {
             entity.HasKey(s => s.SenseId);
-
+            
             entity
                 .Property(s => s.Glosses)
                 .IsRequired()
@@ -108,10 +117,32 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
                 .HasMaxLength(200);
 
             entity
-                .OwnsMany(s => s.Examples)
-                .WithOwner(e => e.Sense);
-        });
+                .OwnsMany(s => s.Examples, subEntity =>
+                {
+                    subEntity.HasKey(e => e.ExampleId);
+            
+                    subEntity
+                        .Property(e => e.Text)
+                        .IsRequired()
+                        .HasMaxLength(100);
+            
+                    subEntity
+                        .Property(e => e.Translation)
+                        .IsRequired()
+                        .HasMaxLength(100);
+            
+                    subEntity
+                        .Property(e => e.Reference)
+                        .IsRequired()
+                        .HasMaxLength(200);
 
+                    subEntity
+                        .Property(e => e.BoldTextOffsets)
+                        .HasMaxLength(50)
+                        .HasColumnType("json");
+                });
+        });
+            
         modelBuilder.Entity<Translation>(entity =>
         {
             entity.HasKey(t => t.TranslationId);
@@ -171,7 +202,7 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
             entity
                 .Property(wr => wr.Tags)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(200);
         });
 
         modelBuilder.Entity<Proverb>(entity =>
@@ -181,11 +212,11 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
             entity
                 .Property(t => t.Phrase)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(200);
             entity
                 .Property(t => t.Sense)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(200);
         });
 
         modelBuilder.Entity<Sound>(entity =>
@@ -227,31 +258,6 @@ public class BackendDbContext(DbContextOptions<BackendDbContext> options) : DbCo
             entity
                 .Property(f => f.RawTags)
                 .HasMaxLength(200);
-        });
-
-        modelBuilder.Entity<Example>(entity =>
-        {
-            entity.HasKey(e => e.ExampleId);
-            
-            entity
-                .Property(e => e.Text)
-                .IsRequired()
-                .HasMaxLength(100);
-            
-            entity
-                .Property(e => e.Translation)
-                .IsRequired()
-                .HasMaxLength(100);
-            
-            entity
-                .Property(e => e.Reference)
-                .IsRequired()
-                .HasMaxLength(200);
-
-            entity
-                .Property(e => e.BoldTextOffsets)
-                .HasMaxLength(50)
-                .HasColumnType("json");
         });
     }
 }
